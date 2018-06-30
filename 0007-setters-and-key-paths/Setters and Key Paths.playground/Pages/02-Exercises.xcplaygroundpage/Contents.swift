@@ -78,11 +78,25 @@ let newUser = user
 /*:
  4. Recall from a [previous episode](https://www.pointfree.co/episodes/ep5-higher-order-functions) that the free `filter` function on arrays has the signature `((A) -> Bool) -> ([A]) -> [A]`. That’s kinda setter-like! What does the composed setter `prop(\\User.favoriteFoods) <<< filter` represent?
  */
-// TODO
+func filter<A>(_ p: @escaping (A) -> Bool) -> ([A]) -> [A] {
+    return { $0.filter(p) }
+}
+
+let nne = user
+    |> (prop(\User.favoriteFoods) <<< filter) { $0.name.hasPrefix("N") }
+// perform a 'filter' on user's favoriteFoods
 /*:
  5. Define the `Result<Value, Error>` type, and create `value` and `error` setters for safely traversing into those cases.
  */
-// TODO
+enum Result<Value, Error> {
+    case success(Value)
+    case error(Error)
+}
+
+let result: Result<Int, Error> = .success(1)
+
+result
+    |> prop(\Result<Int, Error>.success) { success in success }
 /*:
  6. Is it possible to make key path setters work with `enum`s?
  */
