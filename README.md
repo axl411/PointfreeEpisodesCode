@@ -1,4 +1,4 @@
-# Point-Free Episode Code
+# Point-Free Episode Code (my exercises)
 
 This repository is the home of code written on episodes of
 [Point-Free](https://www.pointfree.co).
